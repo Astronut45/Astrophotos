@@ -161,7 +161,7 @@
         const celestialBodies = [
             {
                 id: "moon",
-                name: "The Buck Moon",
+                name: "Moon",
                 image: "20250711_044715000_iOS.jpg",
                 description: "The Moon is Earth's only natural satellite and the fifth largest moon in the Solar System. It plays a crucial role in stabilizing Earth's axial tilt, creating tides, and influencing our planet's climate.",
                 details: [
@@ -184,7 +184,7 @@
             },
             {
                 id: "jupiter",
-                name: "Jupiter with Moons",
+                name: "Jupiter",
                 image: "Jupiter with moons -2.JPG",
                 description: "Jupiter is the fifth planet from the Sun and the largest in our Solar System. It is a gas giant with a mass more than two and a half times that of all the other planets in the Solar System combined. It is primarily composed of hydrogen and helium.",
                 details: [
@@ -2715,7 +2715,7 @@
             },
             {
                 id: "arcturus",
-                name: "Arcturus",
+                name: "Star Arcturus",
                 image: "Odyssey-20250626-025730.jpg",
                 description: "Arcturus (Alpha Boötis) is the brightest star in the constellation Boötes and the fourth brightest star in the night sky. It is a prominent orange-colored giant star.",
                 details: [
@@ -2960,7 +2960,6 @@
                     "The gas expelled into the bubble is not expected to escape the galaxy entirely; it is thought to eventually 'rain' back down, potentially triggering new rounds of star formation."
                 ]
             },
-            // New celestial bodies added below
             {
                 id: "ngc 2261",
                 name: "NGC 2261 Hubble's Variable Nebula",
@@ -3123,7 +3122,7 @@
             },
             {
                 id: "elnath",
-                name: "Elnath (Beta Tauri)",
+                name: "Star Elnath (Beta Tauri)",
                 image: "Odyssey-20250130-032907.jpg",
                 description: "Elnath, also designated as Beta Tauri (β Tauri), is the second brightest star in the constellation Taurus. It is a giant star of spectral type B7III and is notable for its high abundance of manganese. Elnath sits near the galactic anticenter and is positioned along the plane of our Milky Way.",
                 details: [
@@ -3302,7 +3301,7 @@
             },
             {
                 id: "aldebaran",
-                name: "Aldebaran",
+                name: "Star Aldebaran",
                 image: "Odyssey-20250222-013200.jpg",
                 description: "Aldebaran, also known as Alpha Tauri (α Tau), is the brightest star in the constellation Taurus and the 14th brightest star in the night sky. It is an orange giant star, significantly larger and more luminous than our Sun. It marks the 'eye' of the celestial Bull in the constellation Taurus.",
                 details: [
@@ -3461,7 +3460,7 @@
             },
             {
                 id: "alioth",
-                name: "Alioth (Epsilon Ursae Majoris)",
+                name: "Star Alioth (Epsilon Ursae Majoris)",
                 image: "Odyssey-20250310-022923.jpg",
                 description: "Alioth, or Epsilon Ursae Majoris (ε UMa), is the brightest star in the constellation Ursa Major and the 31st brightest star in the night sky. It is a chemically peculiar A-type star and a variable star, meaning its brightness fluctuates slightly. It is part of the Big Dipper asterism, forming part of its handle.",
                 details: [
@@ -3575,7 +3574,7 @@
             },
             {
                 id: "betelgeuse",
-                name: "Betelgeuse (Alpha Orionis)",
+                name: "Star Betelgeuse (Alpha Orionis)",
                 image: "Odyssey-20250317-022813.jpg",
                 description: "Betelgeuse, also known as Alpha Orionis (α Ori), is a prominent red supergiant star in the constellation Orion. It is one of the largest and most luminous stars known, marking Orion's 'right shoulder'. Betelgeuse is a variable star, and its brightness has been observed to fluctuate significantly.",
                 details: [
@@ -3781,7 +3780,7 @@
             },
             {
                 id: "betelgeuse-march-21",
-                name: "Betelgeuse - March 21 Observation",
+                name: "Star Betelgeuse - March 21 Observation",
                 image: "Odyssey-20250322-013943.jpg",
                 description: "This is another observation of Betelgeuse, the red supergiant in Orion, highlighting its characteristic brightness and diffraction spikes. As a variable star nearing the end of its life, Betelgeuse remains a fascinating object for astronomers and a prominent feature in the winter night sky.",
                 details: [
@@ -3872,7 +3871,7 @@
             },
             {
                 id: "betelgeuse-march-23",
-                name: "Betelgeuse - March 23 Observation",
+                name: "Star Betelgeuse - March 23 Observation",
                 image: "Odyssey-20250324-013918.jpg",
                 description: "This image captures Betelgeuse, the prominent red supergiant in Orion, showcasing its characteristic brightness and stellar diffraction. As a variable star nearing the end of its life, Betelgeuse continues to be a subject of intense astronomical study and a striking feature of the winter night sky.",
                 details: [
@@ -4260,7 +4259,7 @@
             },
             {
                 id: "vega",
-                name: "Vega",
+                name: "Star Vega",
                 image: "Odyssey-20250422-032442.jpg",
                 description: "Vega, or Alpha Lyrae (α Lyr), is the brightest star in the constellation Lyra and the fifth brightest star in the night sky. It is a blue-white main-sequence star, significantly hotter and more luminous than our Sun. Vega is a relatively close star and is one of the vertices of the famous Summer Triangle asterism.",
                 details: [
@@ -4305,98 +4304,148 @@
             }
         ];
 
-        // Function to sanitize IDs for HTML
-        function sanitizeId(name) {
-            return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        }
+// Assume celestialBodies array is defined elsewhere in your script,
+// e.g., const celestialBodies = [ { id: 'moon', name: 'Moon', image: '...', description: '...', details: [], funFacts: [] }, ... ];
 
-        // Get container elements
-        const tocList = document.getElementById('toc-list');
-        const celestialBodiesContainer = document.getElementById('celestial-bodies-container');
+// Function to sanitize IDs for HTML
+function sanitizeId(name) {
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
 
-        // Clear existing content to prevent duplication on re-render
-        tocList.innerHTML = '';
-        celestialBodiesContainer.innerHTML = '';
+// Function to determine the category of a celestial body for sorting
+function getCategory(bodyName) {
+    const lowerName = bodyName.toLowerCase();
 
-        // Populate Table of Contents and Celestial Body Sections
-        celestialBodies.forEach(body => {
-            // Create TOC link
-            const tocItem = document.createElement('li');
-            const tocLink = document.createElement('a');
-            tocLink.href = `#${body.id}`;
-            tocLink.textContent = body.name;
-            tocItem.appendChild(tocLink);
-            tocList.appendChild(tocItem);
+    if (lowerName === 'moon') return 'moon';
 
-            // Create Celestial Body Section
-            const section = document.createElement('section');
-            section.id = body.id;
-            section.className = 'celestial-body-section';
+    const planets = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
+    if (planets.includes(lowerName)) return 'planet';
 
-            const h2 = document.createElement('h2');
-            h2.textContent = body.name;
-            section.appendChild(h2);
+    if (lowerName === 'sun' || lowerName.includes('star')) return 'star'; // Basic check for stars
 
-            const img = document.createElement('img');
-            img.src = body.image;
-            img.alt = body.name;
-            // Add onerror to handle potential image loading issues
-            img.onerror = function() {
-                this.onerror=null; // Prevent infinite loop
-                this.src='https://placehold.co/600x400/30363d/c9d1d9?text=Image+Not+Available';
-            };
-            section.appendChild(img);
+    if (/^m\d+/.test(lowerName)) return 'messier'; // Matches 'm' followed by digits
+    if (/^ngc\s?\d+/.test(lowerName)) return 'ngc'; // Matches 'ngc' optionally followed by space and digits
 
-            const descriptionP = document.createElement('p');
-            descriptionP.innerHTML = body.description;
-            section.appendChild(descriptionP);
+    return 'other'; // Default category for anything else
+}
 
-            const detailsUl = document.createElement('ul');
-            body.details.forEach(detail => {
-                const li = document.createElement('li');
-                li.innerHTML = detail;
-                detailsUl.appendChild(li);
-            });
-            section.appendChild(detailsUl);
+// Define the desired order of categories
+const categoryOrder = ['moon', 'planet', 'star', 'messier', 'ngc', 'other'];
 
-            const funFactsDiv = document.createElement('div');
-            funFactsDiv.className = 'fun-facts';
-            const funFactsH3 = document.createElement('h3');
-            funFactsH3.textContent = 'Fun Facts';
-            funFactsDiv.appendChild(funFactsH3);
-            const funFactsUl = document.createElement('ul');
-            body.funFacts.forEach(fact => {
-                const li = document.createElement('li');
-                li.textContent = fact;
-                funFactsUl.appendChild(li);
-            });
-            funFactsDiv.appendChild(funFactsUl);
-            section.appendChild(funFactsDiv);
+// Sort the celestialBodies array BEFORE populating the DOM
+celestialBodies.sort((a, b) => {
+    const categoryA = getCategory(a.name);
+    const categoryB = getCategory(b.name);
 
-            const backToTopLink = document.createElement('a');
-            backToTopLink.href = '#toc';
-            backToTopLink.className = 'back-to-top';
-            backToTopLink.textContent = 'Back to Table of Contents';
-            section.appendChild(backToTopLink);
+    const orderA = categoryOrder.indexOf(categoryA);
+    const orderB = categoryOrder.indexOf(categoryB);
 
-            celestialBodiesContainer.appendChild(section);
-        });
-        	// Get the modal
-      	  const modal = document.getElementById('imageModal');
-     	   // Get the <span> element that closes the modal
-       	 const span = document.getElementsByClassName('modal-close')[0];
+    // Primary sort by category order
+    if (orderA !== orderB) {
+        return orderA - orderB;
+    }
 
-      	  // When the user clicks on <span> (x), close the modal
-       	 span.onclick = function() {
-            	modal.style.display = 'none';
-      	  }
+    // Secondary sort within the same category
+    if (categoryA === 'messier' || categoryA === 'ngc') {
+        // Extract number for numerical sorting (e.g., M1, M31, NGC 224)
+        const numA = parseInt(a.name.match(/\d+/)[0]);
+        const numB = parseInt(b.name.match(/\d+/)[0]);
+        return numA - numB;
+    } else {
+        // Alphabetical sort for other categories (Moon, Planets, Stars, Others)
+        return a.name.localeCompare(b.name);
+    }
+});
 
-        	// When the user clicks anywhere outside of the image, close the modal
-       	 modal.onclick = function(event) {
-            	if (event.target == modal) {
-               	 modal.style.display = 'none';
-            }
-        }		
+
+// Get container elements
+const tocList = document.getElementById('toc-list');
+const celestialBodiesContainer = document.getElementById('celestial-bodies-container');
+
+// Clear existing content to prevent duplication on re-render
+tocList.innerHTML = '';
+celestialBodiesContainer.innerHTML = '';
+
+// Populate Table of Contents and Celestial Body Sections
+celestialBodies.forEach(body => {
+    // Create TOC link
+    const tocItem = document.createElement('li');
+    const tocLink = document.createElement('a');
+    tocLink.href = `#${body.id}`;
+    tocLink.textContent = body.name;
+    tocItem.appendChild(tocLink);
+    tocList.appendChild(tocItem);
+
+    // Create Celestial Body Section
+    const section = document.createElement('section');
+    section.id = body.id;
+    section.className = 'celestial-body-section';
+
+    const h2 = document.createElement('h2');
+    h2.textContent = body.name;
+    section.appendChild(h2);
+
+    const img = document.createElement('img');
+    img.src = body.image;
+    img.alt = body.name;
+    // Add onerror to handle potential image loading issues
+    img.onerror = function() {
+        this.onerror=null; // Prevent infinite loop
+        this.src='https://placehold.co/600x400/30363d/c9d1d9?text=Image+Not+Available';
+    };
+    section.appendChild(img);
+
+    const descriptionP = document.createElement('p');
+    descriptionP.innerHTML = body.description;
+    section.appendChild(descriptionP);
+
+    const detailsUl = document.createElement('ul');
+    body.details.forEach(detail => {
+        const li = document.createElement('li');
+        li.innerHTML = detail;
+        detailsUl.appendChild(li);
+    });
+    section.appendChild(detailsUl);
+
+    const funFactsDiv = document.createElement('div');
+    funFactsDiv.className = 'fun-facts';
+    const funFactsH3 = document.createElement('h3');
+    funFactsH3.textContent = 'Fun Facts';
+    funFactsDiv.appendChild(funFactsH3);
+    const funFactsUl = document.createElement('ul');
+    body.funFacts.forEach(fact => {
+        const li = document.createElement('li');
+        li.textContent = fact;
+        funFactsUl.appendChild(li);
+    });
+    funFactsDiv.appendChild(funFactsUl);
+    section.appendChild(funFactsDiv);
+
+    const backToTopLink = document.createElement('a');
+    backToTopLink.href = '#toc';
+    backToTopLink.className = 'back-to-top';
+    backToTopLink.textContent = 'Back to Table of Contents';
+    section.appendChild(backToTopLink);
+
+    celestialBodiesContainer.appendChild(section);
+});
+
+// Get the modal
+const modal = document.getElementById('imageModal');
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName('modal-close')[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = 'none';
+}
+
+// When the user clicks anywhere outside of the image, close the modal
+modal.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}		
     </script>
  <footer class="footer">
             <p>&copy; 2025 Sankar Raman. All rights reserved. Images are for educational and personal viewing purposes only.</p>
